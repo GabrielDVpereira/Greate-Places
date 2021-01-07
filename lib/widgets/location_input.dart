@@ -7,6 +7,9 @@ import 'package:location/location.dart';
 class LocationInput extends StatefulWidget {
   @override
   _LocationInputState createState() => _LocationInputState();
+
+  final Function onSelectPosition;
+  LocationInput(this.onSelectPosition);
 }
 
 class _LocationInputState extends State<LocationInput> {
@@ -32,7 +35,7 @@ class _LocationInputState extends State<LocationInput> {
 
     if (selectedPosition == null) return;
 
-    print(selectedPosition);
+    widget.onSelectPosition(selectedPosition);
   }
 
   @override
