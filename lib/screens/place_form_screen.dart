@@ -61,8 +61,13 @@ class _PlaceFormScreenState extends State<PlaceFormScreen> {
                 child: Column(
                   children: [
                     TextField(
-                      decoration: InputDecoration(labelText: 'Título'),
                       controller: _titleController,
+                      decoration: InputDecoration(
+                        labelText: 'Título',
+                      ),
+                      onChanged: (text) {
+                        setState(() {});
+                      },
                     ),
                     SizedBox(height: 10),
                     ImageInput(this._selectImage),
