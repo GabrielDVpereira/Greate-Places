@@ -18,7 +18,11 @@ class GreatePlaces with ChangeNotifier {
             id: item['id'],
             title: item['title'],
             image: File(item['image']),
-            location: null,
+            location: PlaceLocation(
+              latitude: item['lat'],
+              longitude: item['lng'],
+              address: item['address'],
+            ),
           ),
         )
         .toList();
@@ -43,6 +47,7 @@ class GreatePlaces with ChangeNotifier {
     LatLng position,
   ) async {
     String address = await LocationUtil.getAddressFrom(position);
+    print(address);
     Place newPlace = Place(
       title: title,
       image: image,
@@ -58,7 +63,10 @@ class GreatePlaces with ChangeNotifier {
     DbUtil.insert("places", {
       'id': newPlace.id,
       'title': newPlace.title,
-      'image': newPlace.image.path
+      'image': newPlace.image.path,
+      'lat': position.latitude,
+      'lng': position.longitude,
+      'address': address
     });
     notifyListeners();
   }
